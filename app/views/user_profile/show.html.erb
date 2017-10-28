@@ -1,6 +1,4 @@
 <h1><%= @user.name %></h1>
-
-
 <div class="row">
   <% @user.pictures.each do |picture| %>
 <div class="col-sm-6 col-md-4">
@@ -9,8 +7,8 @@
           <div class="caption">
             <p>Title: <%= picture.title %></p>
             <p>Rating: <%= picture.average_rating %></p>
-            <%= link_to 'Edit', edit_picture_path(picture) if can? :manage, :all, class: 'btn btn-default' %>
-            <%= link_to 'Delete', picture_path(picture), method: :delete, data: {confirm: "Are you sue?"} if can? :manage, :all, class: 'btn btn-default' %>
+            <% if can? :update, picture %><%= link_to 'Edit', edit_picture_path(picture), class: 'btn btn-default' %> <% end %>
+            <% if can? :destroy, picture %><%= link_to 'Delete', picture_path(picture), method: :delete, data: {confirm: "Are you sue?"}, class: 'btn btn-default' %> <% end %>
             <h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
             <div id="comment-section" class="panel-collapse collapse">
               <div class="list-group">

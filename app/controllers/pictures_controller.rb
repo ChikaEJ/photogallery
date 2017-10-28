@@ -1,4 +1,5 @@
 class PicturesController < InheritedResources::Base
+  load_and_authorize_resource
   def show
     @picture = Picture.find(params[:id])
     @comments = @picture.comments.all
