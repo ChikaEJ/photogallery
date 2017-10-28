@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :pictures do
     resources :comments
   end
+  resources :user_profile
   ActiveAdmin.routes(self)
   devise_for :users
 

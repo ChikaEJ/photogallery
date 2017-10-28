@@ -6,14 +6,32 @@
 </p>
 
 <p>
-  <strong>Image:</strong>
   <%= image_tag(@picture.image_url(:large)) %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Author:</strong>
   <%= @picture.user.name %>
 </p>
+
+<h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
+<div id="comment-section" class="panel-collapse collapse">
+  <div class="list-group">
+    <% @picture.comments.each do |comment| %>
+    <ol id="comments" class="list-group-item-text">
+      <strong>Author: </strong> <%= comment.user.name %><br>
+      <%= comment.raiting %> <br>
+      <%= comment.text %> <br>
+      ___________________________________________________________________________________
+    </ol>
+    <% end %>
+  </div>
+
+  <h3>Add a comment:</h3>
+  <%= render 'comments/form' %>
+</div>
+
+
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>

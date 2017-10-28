@@ -1,4 +1,8 @@
 class PicturesController < InheritedResources::Base
+  def show
+    @picture = Picture.find(params[:id])
+    @comments = @picture.comments.all
+  end
 
   private
 
