@@ -8,8 +8,9 @@
           <%= image_tag(picture.image_url(:large)) %>
           <div class="caption">
             <p>Title: <%= picture.title %></p>
-            <p>Rating: <%= picture.total_raiting %></p>
+            <p>Rating: <%= picture.average_rating %></p>
             <%= link_to 'Edit', edit_picture_path(picture) if can? :manage, :all, class: 'btn btn-default' %>
+            <%= link_to 'Delete', picture_path(picture), method: :delete, data: {confirm: "Are you sue?"} if can? :manage, :all, class: 'btn btn-default' %>
             <h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
             <div id="comment-section" class="panel-collapse collapse">
               <div class="list-group">
@@ -29,7 +30,7 @@
 
                   <div class="form-inputs">
                     <%= f.input :raiting, as: :radio_buttons, :collection => [ ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5] ], :checked => ['1', 1] %>
-                    <%= f.input :user_id, value: current_user.id %>
+                    <%= f.hidden_field :user_id, value: current_user.id %>
                     <%= f.hidden_field :picture_id, value: picture.id %>
                     <%= f.input :text %>
                   </div>

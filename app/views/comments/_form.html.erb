@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :raiting, as: :radio_buttons, :collection => [ ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5] ], :checked => ['1', 1] %>
-    <%= f.input :user_id, value: current_user.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :picture_id, value: @picture.id %>
     <%= f.input :text %>
   </div>

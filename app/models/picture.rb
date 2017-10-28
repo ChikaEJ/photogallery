@@ -3,11 +3,11 @@ class Picture < ApplicationRecord
   has_many :comments, dependent: :destroy
   mount_uploader :image, ImageUploader
 
-  def total_raiting
-    raitings = 0
-    comments.each do |comment|
-      raitings += comment.raiting
+  def average_rating
+    if self.comments.size > 0
+      self.comments.average(:raiting)
+    else
+      'undefined'
     end
-    raitings
   end
 end

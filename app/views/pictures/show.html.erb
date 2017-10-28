@@ -6,7 +6,7 @@
 </p>
 <p>
   <strong>Rating:</strong>
-  <%= @picture.total_raiting %>
+  <%= @picture.average_rating%>
 </p>
 
 <p>
@@ -17,7 +17,8 @@
   <strong>Author:</strong>
   <%= @picture.user.name %>
 </p>
-
+<%= link_to 'Edit', edit_picture_path(@picture) if can? :manage, :all, class: 'btn btn-default' %>
+<%= link_to 'Delete', picture_path(@picture), method: :delete, data: {confirm: "Are you sue?"} if can? :manage, :all, class: 'btn btn-default' %>
 <h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
 <div id="comment-section" class="panel-collapse collapse">
   <div class="list-group">
