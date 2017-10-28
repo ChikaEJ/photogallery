@@ -2,19 +2,21 @@
 
 
 <div class="row">
-  <div class="col-sm-6 col-md-4">
-    <% @pictures.each do |picture| %>
+  <% @pictures.each do |picture| %>
+<div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <%= image_tag(picture.image_url(:large)) %>
       <div class="caption">
+        <p>Rating: <%= picture.total_raiting %></p>
         <h3>Author: <%= link_to picture.user.name, user_profile_path(picture.user_id) %></h3>
         <p><%= link_to 'Show', picture, class: "btn btn-primary" %></p>
         <p><%= link_to 'Add comment', picture, class: "btn btn-primary" %></p>
 
       </div>
     </div>
-    <% end %>
   </div>
+  <% end %>
+
 </div>
 
 

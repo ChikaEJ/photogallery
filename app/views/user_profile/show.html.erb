@@ -1,10 +1,11 @@
 <div class="row">
-  <div class="col-sm-6 col-md-4">
-    <% @user.pictures.each do |picture| %>
+  <% @user.pictures.each do |picture| %>
+<div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <%= image_tag(picture.image_url(:large)) %>
           <div class="caption">
             <p>Title: <%= picture.title %></p>
+            <p>Rating: <%= picture.total_raiting %></p>
             <h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
             <div id="comment-section" class="panel-collapse collapse">
               <div class="list-group">
@@ -13,7 +14,7 @@
                       <strong>Author: </strong> <%= comment.user.name %><br>
                       <%= comment.raiting %> <br>
                       <%= comment.text %> <br>
-                      ___________________________________________________________________________________
+                      ____________________________________
                     </ol>
                 <% end %>
               </div>
@@ -36,6 +37,7 @@
             </div>
           </div>
         </div>
-    <% end %>
   </div>
+  <% end %>
+
 </div>
