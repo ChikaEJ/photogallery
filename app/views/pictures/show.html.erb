@@ -19,21 +19,20 @@
 </p>
 <% if can? :update, @picture %><%= link_to 'Edit', edit_picture_path(@picture), class: 'btn btn-default' %> <% end %>
 <% if can? :destroy, @picture %><%= link_to 'Delete', picture_path(@picture), method: :delete, data: {confirm: "Are you sue?"}, class: 'btn btn-default' %> <% end %>
-<h2><%= link_to 'Comments', '#comment-section', id: 'comments-link', data: {toggle: "collapse"}, class: "btn btn-info" %></h2>
-<div id="comment-section" class="panel-collapse collapse">
-  <div class="list-group">
-    <% @picture.comments.each do |comment| %>
-    <ol id="comments" class="list-group-item-text">
-      <strong>Author: </strong> <%= comment.user.name %><br>
-      <%= comment.raiting %> <br>
-      <%= comment.text %> <br>
-      ___________________________________________________________________________________
-    </ol>
-    <% end %>
-  </div>
 
   <h3>Add a comment:</h3>
   <%= render 'comments/form' %>
+<div class="list-group">
+  <% @picture.comments.order('created_at DESC').each do |comment| %>
+      <ol id="comments" class="list-group-item-text btn-group btn-group-xs">
+        <strong>Author: </strong> <%= comment.user.name %><br>
+        <strong>Author: </strong> <%= comment.raiting %> <br>
+        <%= comment.text %> <br>
+        <% if can? :destroy, comment %><%= link_to "Delete comment", picture_comment_path(comment.picture_id, comment.id), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %> <% end %>
+        <br>
+        ___________________________________________________________________________________
+      </ol>
+  <% end %>
 </div>
 
 

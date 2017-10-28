@@ -5,6 +5,10 @@ class PicturesController < InheritedResources::Base
     @comments = @picture.comments.all
   end
 
+  def index
+    @pictures = Picture.order('created_at DESC')
+  end
+
   private
 
     def picture_params
